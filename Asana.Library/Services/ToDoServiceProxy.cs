@@ -14,7 +14,17 @@ namespace Asana.Library.Services
         {
             get
             {
-                return _toDoList.Take(100).ToList();
+                var currentUser = UserServiceProxy.Current.CurrentUser;
+                if (currentUser == null || currentUser.IsManager)
+                {
+                    // Manager or no user logged in - see all todos
+                    return _toDoList.Take(100).ToList();
+                }
+                else
+                {
+                    // Regular user - only see their assigned todos
+                    return _toDoList.Where(t => t.AssignedUserId == currentUser.Id).Take(100).ToList();
+                }
             }
 
             private set
@@ -68,6 +78,20 @@ namespace Asana.Library.Services
                 toDo.Project = ProjectServiceProxy.Current.GetById(toDo.ProjectId.Value);
             }
 
+            // Ensure User object is set if AssignedUserId is provided
+            if (toDo.AssignedUserId.HasValue && toDo.AssignedUserId > 0 && toDo.AssignedUser == null)
+            {
+                toDo.AssignedUser = UserServiceProxy.Current.GetById(toDo.AssignedUserId.Value);
+            }
+
+            // If no user is assigned and current user is manager, assign to manager
+            var currentUser = UserServiceProxy.Current.CurrentUser;
+            if (toDo.AssignedUserId == null && currentUser?.IsManager == true)
+            {
+                toDo.AssignedUserId = currentUser.Id;
+                toDo.AssignedUser = currentUser;
+            }
+
             if (toDo.Id == 0)
             {
                 toDo.Id = nextKey;
@@ -86,11 +110,19 @@ namespace Asana.Library.Services
                     existing.DueDate = toDo.DueDate;
                     existing.ProjectId = toDo.ProjectId;
                     existing.Project = toDo.Project;
+                    existing.AssignedUserId = toDo.AssignedUserId;
+                    existing.AssignedUser = toDo.AssignedUser;
                     
                     // Ensure Project object is set for existing todo too
                     if (existing.ProjectId.HasValue && existing.ProjectId > 0 && existing.Project == null)
                     {
                         existing.Project = ProjectServiceProxy.Current.GetById(existing.ProjectId.Value);
+                    }
+                    
+                    // Ensure User object is set for existing todo too
+                    if (existing.AssignedUserId.HasValue && existing.AssignedUserId > 0 && existing.AssignedUser == null)
+                    {
+                        existing.AssignedUser = UserServiceProxy.Current.GetById(existing.AssignedUserId.Value);
                     }
                 }
                 else
@@ -139,7 +171,13 @@ namespace Asana.Library.Services
 
         public ToDo? GetById(int id)
         {
-            return ToDos.FirstOrDefault(t => t.Id == id);
+            return _toDoList.FirstOrDefault(t => t.Id == id);
+        }
+
+        public List<ToDo> GetAllToDos()
+        {
+            // This method allows managers to access all todos regardless of assignment
+            return _toDoList.Take(100).ToList();
         }
 
         public void DeleteToDo(ToDo? toDo)

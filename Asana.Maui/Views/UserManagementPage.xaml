@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Asana.Maui.Views.UserManagementPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="User Management">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20" VerticalOptions="FillAndExpand">
+            
+            <!-- Page Title -->
+            <Label Text="User Management" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
+                   TextColor="DarkBlue"
+                   HorizontalOptions="Center" />
+            
+            <!-- Add New User Section -->
+            <Frame BackgroundColor="LightGreen" Padding="15" CornerRadius="8">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Add New User" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    
+                    <Entry x:Name="NewUserNameEntry"
+                           Text="{Binding NewUserName}"
+                           Placeholder="Enter user name"
+                           FontSize="16"
+                           BackgroundColor="White" />
+                    
+                    <Button Text="Add User" 
+                            Command="{Binding AddUserCommand}"
+                            BackgroundColor="Green" 
+                            TextColor="White"
+                            FontSize="14"
+                            Padding="10,6" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Users List -->
+            <Frame BackgroundColor="LightGray" Padding="15" CornerRadius="8">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Current Users" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    
+                    <CollectionView x:Name="UsersCollectionView" 
+                                    ItemsSource="{Binding Users}"
+                                    HeightRequest="300">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10" Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <StackLayout Grid.Column="0" Orientation="Vertical">
+                                        <Label Text="{Binding Name}" 
+                                               FontAttributes="Bold" 
+                                               FontSize="16"/>
+                                        <Label Text="{Binding UserType}" 
+                                               FontSize="12" 
+                                               TextColor="Blue" />
+                                    </StackLayout>
+                                    
+                                    <Label Grid.Column="1" 
+                                           Text="{Binding AssignedTasksCount, StringFormat='Tasks: {0}'}" 
+                                           FontSize="12"
+                                           TextColor="Green"
+                                           VerticalOptions="Center"
+                                           Margin="10,0" />
+                                    
+                                    <Button Grid.Column="2" 
+                                            Text="Delete" 
+                                            Clicked="DeleteUserClicked" 
+                                            BackgroundColor="Red" 
+                                            TextColor="White"
+                                            FontSize="12"
+                                            Padding="8,4"
+                                            IsVisible="{Binding CanDelete}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label Text="No users found"
+                                   FontSize="16"
+                                   TextColor="Gray"
+                                   HorizontalOptions="Center"
+                                   Padding="20" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Error/Success Message -->
+            <Label x:Name="MessageLabel"
+                   Text="{Binding Message}"
+                   TextColor="{Binding MessageColor}"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding HasMessage}" />
+            
+            <!-- Back Button -->
+            <Button x:Name="BackBtn" 
+                    Text="Back to Main" 
+                    Clicked="BackClicked" 
+                    BackgroundColor="Gray" 
+                    TextColor="White"
+                    FontSize="14"
+                    Padding="10,6"
+                    HorizontalOptions="Center" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

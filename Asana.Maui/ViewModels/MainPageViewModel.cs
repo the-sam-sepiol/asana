@@ -51,6 +51,8 @@ namespace Asana.Maui.ViewModels
             });
             ExportDataCommand = new Command(async () => await ExportDataAsync());
             ImportDataCommand = new Command(async () => await ImportDataAsync());
+            LogoutCommand = new Command(async () => await LogoutAsync());
+            ManageUsersCommand = new Command(async () => await ManageUsersAsync());
             RefreshToDos();
         }
 
@@ -88,6 +90,8 @@ namespace Asana.Maui.ViewModels
         public ICommand ToggleSortDirectionCommand { get; set; }
         public ICommand ExportDataCommand { get; set; }
         public ICommand ImportDataCommand { get; set; }
+        public ICommand LogoutCommand { get; set; }
+        public ICommand ManageUsersCommand { get; set; }
 
         public ToDoSortOption SelectedSortOption
         {
@@ -114,6 +118,28 @@ namespace Asana.Maui.ViewModels
         public string SortDirectionText => IsSortDescending ? "DESC" : "ASC";
 
         public List<string> SortOptions => new List<string> { "Name", "Priority", "DueDate", "Project" };
+
+        public string WelcomeMessage
+        {
+            get
+            {
+                var currentUser = UserServiceProxy.Current.CurrentUser;
+                if (currentUser != null)
+                {
+                    return $"Welcome, {currentUser.Name}";
+                }
+                return "Welcome";
+            }
+        }
+
+        public bool IsManager
+        {
+            get
+            {
+                var currentUser = UserServiceProxy.Current.CurrentUser;
+                return currentUser?.IsManager == true;
+            }
+        }
 
         public bool IsShowCompleted
         {
@@ -149,6 +175,10 @@ namespace Asana.Maui.ViewModels
             }
             
             ApplySortingAndFiltering();
+            
+            // Refresh user-related properties
+            NotifyPropertyChanged(nameof(WelcomeMessage));
+            NotifyPropertyChanged(nameof(IsManager));
         }
 
         private void SortToDos(string sortOption)
@@ -329,6 +359,17 @@ namespace Asana.Maui.ViewModels
                 await Application.Current?.MainPage?.DisplayAlert("Import Failed", 
                     $"Error: {ex.Message}", "OK");
             }
+        }
+
+        private async Task LogoutAsync()
+        {
+            UserServiceProxy.Current.Logout();
+            await Shell.Current.GoToAsync("//LoginPage");
+        }
+
+        private async Task ManageUsersAsync()
+        {
+            await Shell.Current.GoToAsync("//UserManagementPage");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

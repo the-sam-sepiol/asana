@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Asana.Maui.Views.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Asana Login">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+            
+            <!-- App Title -->
+            <Label Text="Asana Task Manager" 
+                   FontSize="32" 
+                   FontAttributes="Bold"
+                   TextColor="DarkBlue"
+                   HorizontalOptions="Center" />
+            
+            <!-- Login Section -->
+            <Frame BackgroundColor="LightGray" Padding="20" CornerRadius="10">
+                <VerticalStackLayout Spacing="15">
+                    
+                    <Label Text="User Login" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    
+                    <Entry x:Name="UserNameEntry"
+                           Text="{Binding UserName}"
+                           Placeholder="Enter your name"
+                           FontSize="16"
+                           BackgroundColor="White" />
+                    
+                    <Button Text="Login as User" 
+                            Command="{Binding LoginUserCommand}"
+                            BackgroundColor="Green" 
+                            TextColor="White"
+                            FontSize="16"
+                            Padding="15,10" />
+                    
+                    <Button Text="Manager Login" 
+                            Command="{Binding ShowManagerLoginCommand}"
+                            BackgroundColor="Blue" 
+                            TextColor="White"
+                            FontSize="16"
+                            Padding="15,10" />
+                    
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Manager Login Section -->
+            <Frame x:Name="ManagerLoginFrame"
+                   BackgroundColor="LightBlue" 
+                   Padding="20" 
+                   CornerRadius="10"
+                   IsVisible="{Binding IsManagerLoginVisible}">
+                <VerticalStackLayout Spacing="15">
+                    
+                    <Label Text="Manager Login" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    
+                    <Entry x:Name="ManagerUsernameEntry"
+                           Text="{Binding ManagerUsername}"
+                           Placeholder="Manager Username"
+                           FontSize="16"
+                           BackgroundColor="White" />
+                    
+                    <Entry x:Name="ManagerPasswordEntry"
+                           Text="{Binding ManagerPassword}"
+                           Placeholder="Manager Password"
+                           IsPassword="True"
+                           FontSize="16"
+                           BackgroundColor="White" />
+                    
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+                        <Button Text="Login as Manager" 
+                                Command="{Binding LoginManagerCommand}"
+                                BackgroundColor="DarkBlue" 
+                                TextColor="White"
+                                FontSize="14"
+                                Padding="12,8" />
+                        
+                        <Button Text="Cancel" 
+                                Command="{Binding CancelManagerLoginCommand}"
+                                BackgroundColor="Gray" 
+                                TextColor="White"
+                                FontSize="14"
+                                Padding="12,8" />
+                    </StackLayout>
+                    
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Manager Signup Section -->
+            <Frame x:Name="ManagerSignupFrame"
+                   BackgroundColor="LightCyan" 
+                   Padding="20" 
+                   CornerRadius="10"
+                   IsVisible="{Binding IsManagerSignupVisible}">
+                <VerticalStackLayout Spacing="15">
+                    
+                    <Label Text="First Time? Create Manager Account" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    
+                    <Entry x:Name="NewManagerUsernameEntry"
+                           Text="{Binding NewManagerUsername}"
+                           Placeholder="New Manager Username"
+                           FontSize="16"
+                           BackgroundColor="White" />
+                    
+                    <Entry x:Name="NewManagerPasswordEntry"
+                           Text="{Binding NewManagerPassword}"
+                           Placeholder="New Manager Password"
+                           IsPassword="True"
+                           FontSize="16"
+                           BackgroundColor="White" />
+                    
+                    <Button Text="Create Manager Account" 
+                            Command="{Binding CreateManagerCommand}"
+                            BackgroundColor="Purple" 
+                            TextColor="White"
+                            FontSize="14"
+                            Padding="12,8" />
+                    
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Error Message -->
+            <Label x:Name="ErrorLabel"
+                   Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding HasError}" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

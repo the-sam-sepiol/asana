@@ -11,6 +11,8 @@ namespace Asana.Library.Models
         public int Id {  get; set; }
         public int? ProjectId { get; set; }
         public Project? Project { get; set; }
+        public int? AssignedUserId { get; set; }
+        public User? AssignedUser { get; set; }
 
         public string? Name { get; set; }
         public string? Description { get; set; }
@@ -29,7 +31,8 @@ namespace Asana.Library.Models
             string proj = Project != null ? $" (Project: {Project.Name})" : "";
             string prio = Priority.HasValue ? $" [Priority: {Priority}]" : "";
             string due = DueDate.HasValue ? $" [Due: {DueDate:yyyy-MM-dd}]" : "";
-            return $"{Name} - {Description} - {comp}{prio}{proj}{due}";
+            string assigned = AssignedUser != null ? $" [Assigned: {AssignedUser.Name}]" : "";
+            return $"{Name} - {Description} - {comp}{prio}{proj}{due}{assigned}";
         }
     }
 }

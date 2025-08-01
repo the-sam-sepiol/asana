@@ -47,6 +47,34 @@ namespace Asana.Maui.ViewModels
             }
         }
 
+        public ObservableCollection<User> Users
+        {
+            get
+            {
+                var allUsers = new List<User>();
+                
+                // Add "Unassigned" option for managers
+                if (IsManagerLoggedIn)
+                {
+                    allUsers.Add(new User { Id = 0, Name = "Unassigned" });
+                }
+                
+                var users = UserServiceProxy.Current.Users;
+                allUsers.AddRange(users);
+                
+                return new ObservableCollection<User>(allUsers);
+            }
+        }
+
+        public bool IsManagerLoggedIn
+        {
+            get
+            {
+                var currentUser = UserServiceProxy.Current.CurrentUser;
+                return currentUser?.IsManager == true;
+            }
+        }
+
         public int SelectedPriority
         {
             get => Model?.Priority ?? 4;
@@ -81,6 +109,33 @@ namespace Asana.Maui.ViewModels
                     {
                         Model.ProjectId = value?.Model?.Id;
                         Model.Project = value?.Model;
+                    }
+                }
+            }
+        }
+
+        public User? SelectedUser
+        {
+            get
+            {
+                if (Model?.AssignedUserId == null || Model.AssignedUserId == 0)
+                    return Users.FirstOrDefault(u => u.Id == 0);
+                
+                return Users.FirstOrDefault(u => u.Id == Model?.AssignedUserId);
+            }
+            set
+            {
+                if (Model != null)
+                {
+                    if (value?.Id == 0)
+                    {
+                        Model.AssignedUserId = null;
+                        Model.AssignedUser = null;
+                    }
+                    else
+                    {
+                        Model.AssignedUserId = value?.Id;
+                        Model.AssignedUser = value;
                     }
                 }
             }

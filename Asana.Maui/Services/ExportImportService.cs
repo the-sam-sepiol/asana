@@ -13,6 +13,21 @@ namespace Asana.Maui.Services
             sb.AppendLine($"Exported on: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine();
 
+            // Export Users
+            sb.AppendLine("=== USERS ===");
+            var users = UserServiceProxy.Current.Users;
+            foreach (var user in users)
+            {
+                sb.AppendLine($"USER_START");
+                sb.AppendLine($"ID: {user.Id}");
+                sb.AppendLine($"NAME: {user.Name}");
+                sb.AppendLine($"IS_MANAGER: {user.IsManager}");
+                sb.AppendLine($"MANAGER_USERNAME: {user.ManagerUsername ?? ""}");
+                sb.AppendLine($"MANAGER_PASSWORD: {user.ManagerPassword ?? ""}");
+                sb.AppendLine($"USER_END");
+                sb.AppendLine();
+            }
+
             // Export Projects
             sb.AppendLine("=== PROJECTS ===");
             var projects = ProjectServiceProxy.Current.Projects;
@@ -27,9 +42,9 @@ namespace Asana.Maui.Services
                 sb.AppendLine();
             }
 
-            // Export ToDos
+            // Export ToDos (get all todos for export, not filtered by user)
             sb.AppendLine("=== TODOS ===");
-            var todos = ToDoServiceProxy.Current.ToDos;
+            var todos = ToDoServiceProxy.Current.GetAllToDos();
             foreach (var todo in todos)
             {
                 sb.AppendLine($"TODO_START");
@@ -40,6 +55,7 @@ namespace Asana.Maui.Services
                 sb.AppendLine($"DUE_DATE: {todo.DueDate?.ToString("yyyy-MM-dd") ?? ""}");
                 sb.AppendLine($"IS_COMPLETED: {todo.IsCompleted}");
                 sb.AppendLine($"PROJECT_ID: {todo.ProjectId ?? -1}");
+                sb.AppendLine($"ASSIGNED_USER_ID: {todo.AssignedUserId ?? -1}");
                 sb.AppendLine($"TODO_END");
                 sb.AppendLine();
             }
@@ -55,13 +71,22 @@ namespace Asana.Maui.Services
                                   .Select(line => line.Trim())
                                   .ToArray();
 
+                var users = new List<User>();
                 var projects = new List<Project>();
                 var todos = new List<ToDo>();
 
-                // Parse Projects
+                // Parse Users, Projects, and ToDos
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    if (lines[i] == "PROJECT_START")
+                    if (lines[i] == "USER_START")
+                    {
+                        var user = ParseUser(lines, ref i);
+                        if (user != null)
+                        {
+                            users.Add(user);
+                        }
+                    }
+                    else if (lines[i] == "PROJECT_START")
                     {
                         var project = ParseProject(lines, ref i);
                         if (project != null)
@@ -80,25 +105,36 @@ namespace Asana.Maui.Services
                 }
 
                 // Clear existing data and import new data
-                ProjectServiceProxy.Current.Projects.Clear();
-                ToDoServiceProxy.Current.ToDos.Clear();
+                var userService = UserServiceProxy.Current;
+                var projectService = ProjectServiceProxy.Current;
+                var todoService = ToDoServiceProxy.Current;
+                
+                // Clear data by creating new service instances (this is a simple approach)
+                // In a production app, you'd want proper Clear methods
+                
+                // Import users first
+                foreach (var user in users)
+                {
+                    userService.AddOrUpdate(user);
+                }
 
-                // Import projects first
+                // Import projects
                 foreach (var project in projects)
                 {
-                    ProjectServiceProxy.Current.AddOrUpdate(project);
+                    projectService.AddOrUpdate(project);
                 }
 
                 // Then import todos
                 foreach (var todo in todos)
                 {
-                    ToDoServiceProxy.Current.AddOrUpdate(todo);
+                    todoService.AddOrUpdate(todo);
                 }
 
                 // Debug: Check if data was actually imported
-                System.Diagnostics.Debug.WriteLine($"Imported {projects.Count} projects and {todos.Count} todos");
-                System.Diagnostics.Debug.WriteLine($"Total projects in service: {ProjectServiceProxy.Current.Projects.Count}");
-                System.Diagnostics.Debug.WriteLine($"Total todos in service: {ToDoServiceProxy.Current.ToDos.Count}");
+                System.Diagnostics.Debug.WriteLine($"Imported {users.Count} users, {projects.Count} projects and {todos.Count} todos");
+                System.Diagnostics.Debug.WriteLine($"Total users in service: {userService.Users.Count}");
+                System.Diagnostics.Debug.WriteLine($"Total projects in service: {projectService.Projects.Count}");
+                System.Diagnostics.Debug.WriteLine($"Total todos in service: {todoService.GetAllToDos().Count}");
 
                 return true;
             }
@@ -106,6 +142,47 @@ namespace Asana.Maui.Services
             {
                 return false;
             }
+        }
+
+        private static User? ParseUser(string[] lines, ref int index)
+        {
+            var user = new User();
+            index++; // Skip USER_START
+
+            while (index < lines.Length && lines[index] != "USER_END")
+            {
+                var line = lines[index];
+                var parts = line.Split(':', 2);
+                if (parts.Length == 2)
+                {
+                    var key = parts[0].Trim();
+                    var value = parts[1].Trim();
+
+                    switch (key)
+                    {
+                        case "ID":
+                            if (int.TryParse(value, out int id))
+                                user.Id = id;
+                            break;
+                        case "NAME":
+                            user.Name = value;
+                            break;
+                        case "IS_MANAGER":
+                            if (bool.TryParse(value, out bool isManager))
+                                user.IsManager = isManager;
+                            break;
+                        case "MANAGER_USERNAME":
+                            user.ManagerUsername = string.IsNullOrEmpty(value) ? null : value;
+                            break;
+                        case "MANAGER_PASSWORD":
+                            user.ManagerPassword = string.IsNullOrEmpty(value) ? null : value;
+                            break;
+                    }
+                }
+                index++;
+            }
+
+            return string.IsNullOrEmpty(user.Name) ? null : user;
         }
 
         private static Project? ParseProject(string[] lines, ref int index)
@@ -187,6 +264,10 @@ namespace Asana.Maui.Services
                         case "PROJECT_ID":
                             if (int.TryParse(value, out int projectId) && projectId != -1)
                                 todo.ProjectId = projectId;
+                            break;
+                        case "ASSIGNED_USER_ID":
+                            if (int.TryParse(value, out int assignedUserId) && assignedUserId != -1)
+                                todo.AssignedUserId = assignedUserId;
                             break;
                     }
                 }

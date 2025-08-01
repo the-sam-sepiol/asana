@@ -17,6 +17,15 @@ namespace Asana.Maui
 
         private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
         {
+            // Check if user is logged in
+            var currentUser = UserServiceProxy.Current.CurrentUser;
+            if (currentUser == null)
+            {
+                // Redirect to login page if no user is logged in
+                Shell.Current.GoToAsync("//LoginPage");
+                return;
+            }
+            
             ViewModel.RefreshToDos();
         }
 

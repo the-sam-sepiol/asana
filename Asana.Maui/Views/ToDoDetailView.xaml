@@ -32,6 +32,15 @@
                     SelectedItem="{Binding SelectedProject}"
                     ItemDisplayBinding="{Binding DisplayText}" />
             
+            <!-- User Assignment Picker (only visible for managers) -->
+            <Label Text="Assign to User:" 
+                   IsVisible="{Binding IsManagerLoggedIn}" />
+            <Picker x:Name="UserPicker" 
+                    ItemsSource="{Binding Users}"
+                    SelectedItem="{Binding SelectedUser}"
+                    ItemDisplayBinding="{Binding Name}"
+                    IsVisible="{Binding IsManagerLoggedIn}" />
+            
             <!-- Due Date DatePicker -->
             <Label Text="Due Date:" />
             <DatePicker x:Name="DueDatePicker" 
