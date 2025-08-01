@@ -9,7 +9,7 @@ namespace Asana.Maui.Services
         public static async Task<string> ExportToTextAsync()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("=== ASANA CLI EXPORT ===");
+            sb.AppendLine("=== ASANA EXPORT ===");
             sb.AppendLine($"Exported on: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine();
 
@@ -42,7 +42,7 @@ namespace Asana.Maui.Services
                 sb.AppendLine();
             }
 
-            // export ToDos (get all todos for export, not filtered by user)
+            // export ToDos 
             sb.AppendLine("=== TODOS ===");
             var todos = ToDoServiceProxy.Current.GetAllToDos();
             foreach (var todo in todos)
@@ -67,9 +67,7 @@ namespace Asana.Maui.Services
         {
             try
             {
-                var lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries)
-                                  .Select(line => line.Trim())
-                                  .ToArray();
+                var lines = content.Split('\n', StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).ToArray();
 
                 var users = new List<User>();
                 var projects = new List<Project>();
@@ -109,8 +107,6 @@ namespace Asana.Maui.Services
                 var projectService = ProjectServiceProxy.Current;
                 var todoService = ToDoServiceProxy.Current;
                 
-                // clear data by creating new service instances (this is a simple approach)
-                // in a production app, you'd want proper Clear methods
                 
                 // import users first
                 foreach (var user in users)
@@ -155,11 +151,6 @@ namespace Asana.Maui.Services
                 // refresh project completion percentages after all todos are linked
                 projectService.RefreshCompletionPercentages();
 
-                // debug: check if data was actually imported
-                System.Diagnostics.Debug.WriteLine($"Imported {users.Count} users, {projects.Count} projects and {todos.Count} todos");
-                System.Diagnostics.Debug.WriteLine($"Total users in service: {userService.Users.Count}");
-                System.Diagnostics.Debug.WriteLine($"Total projects in service: {projectService.Projects.Count}");
-                System.Diagnostics.Debug.WriteLine($"Total todos in service: {todoService.GetAllToDos().Count}");
 
                 return true;
             }
@@ -300,6 +291,7 @@ namespace Asana.Maui.Services
 
         public static async Task<string> GetExportFilePathAsync()
         {
+            // grabs the filepath for the documents folder
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var fileName = $"AsanaCLI_Export_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
             return Path.Combine(documentsPath, fileName);

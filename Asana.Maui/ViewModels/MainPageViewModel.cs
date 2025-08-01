@@ -315,8 +315,7 @@ namespace Asana.Maui.ViewModels
         {
             try
             {
-                // for now, we'll use a simple input dialog to get file path
-                // in a production app, you'd use a file picker
+
                 var filePath = await Application.Current?.MainPage?.DisplayPromptAsync("Import File", 
                     "Enter the full path to the export file:");
 

@@ -144,15 +144,9 @@ namespace Asana.Maui.ViewModels
             // apply sorting
             filteredProjects = SelectedSortOption switch
             {
-                ProjectSortOption.Name => IsSortDescending 
-                    ? filteredProjects.OrderByDescending(p => p.Model?.Name) 
-                    : filteredProjects.OrderBy(p => p.Model?.Name),
-                ProjectSortOption.TodoCount => IsSortDescending 
-                    ? filteredProjects.OrderByDescending(p => GetTodoCount(p.Model)) 
-                    : filteredProjects.OrderBy(p => GetTodoCount(p.Model)),
-                ProjectSortOption.CompletionPercent => IsSortDescending 
-                    ? filteredProjects.OrderByDescending(p => p.Model?.CompletionPercent) 
-                    : filteredProjects.OrderBy(p => p.Model?.CompletionPercent),
+                ProjectSortOption.Name => IsSortDescending ? filteredProjects.OrderByDescending(p => p.Model?.Name) : filteredProjects.OrderBy(p => p.Model?.Name),
+                ProjectSortOption.TodoCount => IsSortDescending ? filteredProjects.OrderByDescending(p => GetTodoCount(p.Model)) : filteredProjects.OrderBy(p => GetTodoCount(p.Model)),
+                ProjectSortOption.CompletionPercent => IsSortDescending ? filteredProjects.OrderByDescending(p => p.Model?.CompletionPercent) : filteredProjects.OrderBy(p => p.Model?.CompletionPercent),
                 _ => filteredProjects
             };
 
