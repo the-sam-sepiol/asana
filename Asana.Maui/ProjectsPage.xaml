@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Asana.Maui.Views.ProjectsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Asana.Maui.Converters"
+             NavigatedTo="ContentPage_NavigatedTo"
+             Title="Project Management">
+
+    <ContentPage.Resources>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="15,5" VerticalOptions="FillAndExpand">
+            
+            <!-- Search Section -->
+            <Frame BackgroundColor="LightGray" Padding="8" CornerRadius="3">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Entry Grid.Column="0"
+                           Text="{Binding SearchText}"
+                           Placeholder="Search projects..."
+                           FontSize="14"
+                           BackgroundColor="White"
+                           ClearButtonVisibility="WhileEditing" />
+                    <Button Grid.Column="1"
+                            Text="Clear"
+                            Command="{Binding ClearSearchCommand}"
+                            BackgroundColor="DarkBlue"
+                            TextColor="White"
+                            FontSize="12"
+                            Padding="8,4"
+                            Margin="5,0,0,0"
+                            IsVisible="{Binding SearchText, Converter={StaticResource StringToBoolConverter}}" />
+                </Grid>
+            </Frame>
+
+            <!-- Sort Section -->
+            <Frame BackgroundColor="LightBlue" Padding="8" CornerRadius="3">
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                    <Label Grid.Column="0" 
+                           Text="Sort:" 
+                           VerticalOptions="Center" 
+                           FontSize="12"
+                           FontAttributes="Bold" />
+                    
+                    <Picker Grid.Column="1" 
+                            ItemsSource="{Binding SortOptions}"
+                            SelectedItem="{Binding SelectedSortOption, Converter={StaticResource EnumToStringConverter}}"
+                            BackgroundColor="White"
+                            FontSize="12"
+                            Margin="5,0" />
+                    
+                    <Button Grid.Column="2"
+                            Text="{Binding SortDirectionText}"
+                            Command="{Binding ToggleSortDirectionCommand}"
+                            BackgroundColor="Orange"
+                            TextColor="White"
+                            FontSize="11"
+                            Padding="6,3"
+                            WidthRequest="50" />
+                    
+                    <Label Grid.Column="3" 
+                           Text="📊" 
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           Margin="5,0,0,0" />
+                </Grid>
+            </Frame>
+            
+            <CollectionView x:Name="ProjectsCollectionView" 
+                            ItemsSource="{Binding Projects}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedProject}"
+                            HeightRequest="450">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Project Name -->
+                            <Label Grid.Row="0" Grid.Column="0" 
+                                   Text="{Binding Model.Name}" 
+                                   FontAttributes="Bold" 
+                                   FontSize="18" 
+                                   TextColor="DarkBlue" />
+                            
+                            <!-- Project Description -->
+                            <Label Grid.Row="1" Grid.Column="0" 
+                                   Text="{Binding Model.Description}" 
+                                   FontSize="14" 
+                                   TextColor="Gray" />
+                            
+                            <!-- Completion Percentage -->
+                            <Label Grid.Row="2" Grid.Column="0" 
+                                   Text="{Binding CompletionPercent, StringFormat='Completion: {0}%'}" 
+                                   FontSize="12" 
+                                   TextColor="Blue" />
+                            
+                            <!-- ToDos Count -->
+                            <Label Grid.Row="3" Grid.Column="0" 
+                                   Text="{Binding ToDoCount, StringFormat='ToDos: {0}'}" 
+                                   FontSize="12" 
+                                   TextColor="Green" 
+                                   FontAttributes="Bold" />
+                            
+                            <!-- ToDos List -->
+                            <StackLayout Grid.Row="4" Grid.Column="0" 
+                                         Margin="20,5,0,0">
+                                <CollectionView ItemsSource="{Binding ProjectToDos}"
+                                                HeightRequest="{Binding ToDoListHeight}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Padding="5,2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <!-- Completion Status -->
+                                                <Label Grid.Column="0" 
+                                                       Text="{Binding CompletionIcon}" 
+                                                       FontSize="14"
+                                                       VerticalOptions="Center"
+                                                       Margin="0,0,10,0" />
+                                                
+                                                <!-- ToDo Name -->
+                                                <Label Grid.Column="1" 
+                                                       Text="{Binding Name}" 
+                                                       FontSize="12"
+                                                       TextColor="{Binding TextColor}"
+                                                       TextDecorations="{Binding TextDecoration}"
+                                                       VerticalOptions="Center" />
+                                                
+                                                <!-- Priority -->
+                                                <Label Grid.Column="2" 
+                                                       Text="{Binding Priority}" 
+                                                       FontSize="10"
+                                                       TextColor="Orange"
+                                                       VerticalOptions="Center"
+                                                       Margin="10,0,0,0" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                    <CollectionView.EmptyView>
+                                        <Label Text="📝 No todos in this project" 
+                                               FontSize="12" 
+                                               TextColor="LightGray"
+                                               HorizontalOptions="Center"
+                                               Padding="10" />
+                                    </CollectionView.EmptyView>
+                                </CollectionView>
+                            </StackLayout>
+                            
+                            <!-- Delete Button -->
+                            <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="5"
+                                    Text="Delete" 
+                                    Clicked="InLineDeleteClicked" 
+                                    BackgroundColor="Red" 
+                                    TextColor="White" 
+                                    VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="20">
+                        <Label Text="No projects found"
+                               FontSize="16"
+                               TextColor="Gray"
+                               HorizontalOptions="Center" />
+                        <Label Text="{Binding SearchText, StringFormat='Try adjusting your search: &quot;{0}&quot;'}"
+                               FontSize="14"
+                               TextColor="Gray"
+                               HorizontalOptions="Center"
+                               IsVisible="{Binding SearchText, Converter={StaticResource StringToBoolConverter}}" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="8">
+                <Button x:Name="AddNewBtn" 
+                        Text="Add New Project" 
+                        Clicked="AddNewClicked" 
+                        BackgroundColor="Green" 
+                        TextColor="White"
+                        FontSize="12"
+                        Padding="8,4" />
+                
+                <Button x:Name="EditBtn" 
+                        Text="Edit Selected" 
+                        Clicked="EditClicked" 
+                        BackgroundColor="Blue" 
+                        TextColor="White"
+                        FontSize="12"
+                        Padding="8,4" />
+                
+                <Button x:Name="DeleteBtn" 
+                        Text="Delete Selected" 
+                        Clicked="DeleteClicked" 
+                        BackgroundColor="Red" 
+                        TextColor="White"
+                        FontSize="12"
+                        Padding="8,4" />
+            </StackLayout>
+
+            <!-- Export/Import Buttons -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="8">
+                <Button Text="📤 Export" 
+                        Command="{Binding ExportDataCommand}"
+                        BackgroundColor="Purple" 
+                        TextColor="White"
+                        FontSize="11"
+                        Padding="6,3" />
+                
+                <Button Text="📥 Import" 
+                        Command="{Binding ImportDataCommand}"
+                        BackgroundColor="Teal" 
+                        TextColor="White"
+                        FontSize="11"
+                        Padding="6,3" />
+            </StackLayout>
+
+            <!-- Back Button -->
+            <Button x:Name="BackBtn" 
+                    Text="Back to ToDos" 
+                    Clicked="BackClicked" 
+                    BackgroundColor="Gray" 
+                    TextColor="White"
+                    FontSize="12"
+                    Padding="8,4"
+                    HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
