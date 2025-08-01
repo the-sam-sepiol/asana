@@ -130,7 +130,7 @@ namespace Asana.Maui.Services
                     todoService.AddOrUpdate(todo);
                 }
 
-                // after importing todos, link them to their projects
+                // after importing todos, link them to their projects and assigned users
                 foreach (var todo in todoService.GetAllToDos())
                 {
                     if (todo.ProjectId.HasValue && todo.ProjectId.Value > 0)
@@ -139,6 +139,15 @@ namespace Asana.Maui.Services
                         if (project != null)
                         {
                             todo.Project = project;
+                        }
+                    }
+
+                    if (todo.AssignedUserId.HasValue && todo.AssignedUserId.Value > 0)
+                    {
+                        var user = userService.Users.FirstOrDefault(u => u.Id == todo.AssignedUserId.Value);
+                        if (user != null)
+                        {
+                            todo.AssignedUser = user;
                         }
                     }
                 }
