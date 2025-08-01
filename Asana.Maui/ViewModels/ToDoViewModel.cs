@@ -11,6 +11,10 @@ namespace Asana.Maui.ViewModels
 
         public string DisplayText => Model?.ToString() ?? "Unknown ToDo";
 
+        public string ProjectName => Model?.Project?.Name ?? "No Project";
+
+        public string AssignedUserName => Model?.AssignedUser?.Name ?? "Unassigned";
+
         public bool IsManagerLoggedIn
         {
             get

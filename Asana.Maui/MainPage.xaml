@@ -147,9 +147,9 @@
                                 <Label Text="{Binding Model.Description}" />
                                 <Label Text="{Binding Model.Priority, StringFormat='Priority: {0}'}"
                                        FontSize="Small" TextColor="Blue" />                                        
-                                <Label Text="{Binding Model.Project.Name, StringFormat='Project: {0}'}" 
+                                <Label Text="{Binding ProjectName, StringFormat='Project: {0}'}" 
                                        FontSize="Small" TextColor="Gray" />
-                                <Label Text="{Binding Model.AssignedUser.Name, StringFormat='Assigned: {0}'}" 
+                                <Label Text="{Binding AssignedUserName, StringFormat='Assigned: {0}'}" 
                                        FontSize="Small" TextColor="Purple"
                                        IsVisible="{Binding IsManagerLoggedIn}" />
                                 <Label Text="{Binding Model.DueDate, StringFormat='Due: {0:yyyy-MM-dd}'}" 
@@ -250,7 +250,7 @@
                                                            TextColor="Red" 
                                                            Margin="15,0,0,0" />
                                                 </StackLayout>
-                                                <Label Text="{Binding Model.AssignedUser.Name, StringFormat='Assigned: {0}'}" 
+                                                <Label Text="{Binding AssignedUserName, StringFormat='Assigned: {0}'}" 
                                                        FontSize="10" 
                                                        TextColor="Purple"
                                                        IsVisible="{Binding IsManagerLoggedIn}" />
