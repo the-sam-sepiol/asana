@@ -35,7 +35,7 @@ namespace Asana.Library.Services
 
         private UserServiceProxy()
         {
-            // Don't initialize with a default manager - let the UI handle manager creation
+            // start with an empty user list - the UI will handle creating the first manager
         }
 
         private static UserServiceProxy? instance;

@@ -25,16 +25,16 @@ namespace Asana.Maui.ViewModels
             CancelManagerLoginCommand = new Command(() => CancelManagerLogin());
             CreateManagerCommand = new Command(async () => await CreateManager());
 
-            // Check if there's already a manager account
+            // check if there's already a manager account
             var existingManager = UserServiceProxy.Current.Users.FirstOrDefault(u => u.IsManager);
             if (existingManager == null)
             {
-                // No manager exists, show signup form
+                // no manager exists, show signup form
                 IsManagerSignupVisible = true;
             }
             else
             {
-                // Manager exists, hide signup form
+                // manager exists, hide signup form
                 IsManagerSignupVisible = false;
             }
         }
@@ -164,17 +164,17 @@ namespace Asana.Maui.ViewModels
 
         private void ShowManagerLogin()
         {
-            // Check if manager exists
+            // check if manager exists
             var existingManager = UserServiceProxy.Current.Users.FirstOrDefault(u => u.IsManager);
             if (existingManager == null)
             {
-                // No manager exists, show signup instead
+                // no manager exists, show signup instead
                 IsManagerSignupVisible = true;
                 IsManagerLoginVisible = false;
             }
             else
             {
-                // Manager exists, show login
+                // manager exists, show login
                 IsManagerLoginVisible = true;
                 IsManagerSignupVisible = false;
             }
@@ -227,7 +227,7 @@ namespace Asana.Maui.ViewModels
             UserServiceProxy.Current.AddOrUpdate(newManager);
             UserServiceProxy.Current.CurrentUser = newManager;
 
-            // Clear the form
+            // clear the form
             NewManagerUsername = string.Empty;
             NewManagerPassword = string.Empty;
             IsManagerSignupVisible = false;

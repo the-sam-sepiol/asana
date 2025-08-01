@@ -105,7 +105,7 @@ namespace Asana.Maui.ViewModels
             
             ApplySortingAndFiltering();
             
-            // Notify that project todos may have changed
+            // notify that project todos may have changed
             foreach (var project in _allProjects)
             {
                 project.NotifyPropertyChanged(nameof(project.ProjectToDos));
@@ -132,7 +132,7 @@ namespace Asana.Maui.ViewModels
         {
             IEnumerable<ProjectViewModel> filteredProjects = _allProjects;
             
-            // Apply search filter
+            // apply search filter
             if (!string.IsNullOrWhiteSpace(SearchText))
             {
                 filteredProjects = filteredProjects.Where(project =>
@@ -141,7 +141,7 @@ namespace Asana.Maui.ViewModels
                 );
             }
 
-            // Apply sorting
+            // apply sorting
             filteredProjects = SelectedSortOption switch
             {
                 ProjectSortOption.Name => IsSortDescending 

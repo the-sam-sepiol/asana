@@ -8,7 +8,7 @@ namespace Asana.Maui
         {
             InitializeComponent();
             
-            // Register routes for navigation
+            // register routes for navigation
             Routing.RegisterRoute(nameof(ToDoDetailView), typeof(ToDoDetailView));
             Routing.RegisterRoute(nameof(ProjectsPage), typeof(ProjectsPage));
             Routing.RegisterRoute(nameof(ProjectDetailView), typeof(ProjectDetailView));

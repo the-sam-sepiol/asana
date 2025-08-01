@@ -81,7 +81,7 @@ namespace Asana.Library.Services
                 }
                 else
                 {
-                    // Add new project with specific ID
+                    // add new project with specific ID
                     if (project.ToDos == null)
                         project.ToDos = new List<ToDo>();
                     _projectList.Add(project);

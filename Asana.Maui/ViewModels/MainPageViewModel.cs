@@ -175,7 +175,7 @@ namespace Asana.Maui.ViewModels
             
             ApplySortingAndFiltering();
             
-            // Refresh user-related properties
+            // refresh user-related properties
             NotifyPropertyChanged(nameof(WelcomeMessage));
             NotifyPropertyChanged(nameof(IsManager));
         }
@@ -197,7 +197,7 @@ namespace Asana.Maui.ViewModels
         {
             IEnumerable<ToDoViewModel> filteredToDos = _allToDos;
             
-            // Apply search filter
+            // apply search filter
             if (!string.IsNullOrWhiteSpace(SearchText))
             {
                 filteredToDos = filteredToDos.Where(todo =>
@@ -207,7 +207,7 @@ namespace Asana.Maui.ViewModels
                 );
             }
 
-            // Apply sorting
+            // apply sorting
             filteredToDos = SelectedSortOption switch
             {
                 ToDoSortOption.Name => IsSortDescending 
@@ -227,12 +227,12 @@ namespace Asana.Maui.ViewModels
 
             if (IsGroupedView)
             {
-                // Group by project
+                // group by project
                 PopulateGroupedView(filteredToDos);
             }
             else
             {
-                // Regular list view
+                // regular list view
                 ToDos.Clear();
                 foreach (var todo in filteredToDos)
                 {
@@ -252,14 +252,14 @@ namespace Asana.Maui.ViewModels
                 
                 if (projectId > 0)
                 {
-                    // Try to get project name from the Project object first
+                    // try to get project name from the Project object first
                     if (!string.IsNullOrEmpty(t.Model?.Project?.Name))
                     {
                         projectName = t.Model.Project.Name;
                     }
                     else
                     {
-                        // If Project object is null, fetch from service
+                        // if Project object is null, fetch from service
                         var project = ProjectServiceProxy.Current.GetById(projectId);
                         projectName = project?.Name ?? $"Project {projectId}";
                     }
@@ -276,7 +276,7 @@ namespace Asana.Maui.ViewModels
                     ProjectName = group.Key.ProjectName
                 };
 
-                // Calculate completion percentage for this group
+                // calculate completion percentage for this group
                 var todoList = group.ToList();
                 if (todoList.Any())
                 {
@@ -324,8 +324,8 @@ namespace Asana.Maui.ViewModels
         {
             try
             {
-                // For now, we'll use a simple input dialog to get file path
-                // In a production app, you'd use a file picker
+                // for now, we'll use a simple input dialog to get file path
+                // in a production app, you'd use a file picker
                 var filePath = await Application.Current?.MainPage?.DisplayPromptAsync("Import File", 
                     "Enter the full path to the export file:");
 

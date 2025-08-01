@@ -17,12 +17,12 @@ namespace Asana.Library.Services
                 var currentUser = UserServiceProxy.Current.CurrentUser;
                 if (currentUser == null || currentUser.IsManager)
                 {
-                    // Manager or no user logged in - see all todos
+                    // managers or no user logged in - see all todos
                     return _toDoList.Take(100).ToList();
                 }
                 else
                 {
-                    // Regular user - only see their assigned todos
+                    // regular users only see their assigned todos
                     return _toDoList.Where(t => t.AssignedUserId == currentUser.Id).Take(100).ToList();
                 }
             }
@@ -67,92 +67,36 @@ namespace Asana.Library.Services
                 return instance;
             }
         }
-        public ToDo? AddOrUpdate(ToDo? toDo)
+        public void AddOrUpdate(ToDo item)
         {
-            if (toDo == null)
-                return null;
+            // see if we can find a match
+            var existingToDo = _toDoList.Where(x => x.Id == item.Id).FirstOrDefault();
 
-            // Ensure Project object is set if ProjectId is provided
-            if (toDo.ProjectId.HasValue && toDo.ProjectId > 0 && toDo.Project == null)
+            if (existingToDo == null)
             {
-                toDo.Project = ProjectServiceProxy.Current.GetById(toDo.ProjectId.Value);
-            }
-
-            // Ensure User object is set if AssignedUserId is provided
-            if (toDo.AssignedUserId.HasValue && toDo.AssignedUserId > 0 && toDo.AssignedUser == null)
-            {
-                toDo.AssignedUser = UserServiceProxy.Current.GetById(toDo.AssignedUserId.Value);
-            }
-
-            // If no user is assigned and current user is manager, assign to manager
-            var currentUser = UserServiceProxy.Current.CurrentUser;
-            if (toDo.AssignedUserId == null && currentUser?.IsManager == true)
-            {
-                toDo.AssignedUserId = currentUser.Id;
-                toDo.AssignedUser = currentUser;
-            }
-
-            if (toDo.Id == 0)
-            {
-                toDo.Id = nextKey;
-                _toDoList.Add(toDo);
-            }
-            else
-            {
-                var existing = GetById(toDo.Id);
-                if (existing != null)
+                // new todo, so add it with current highest id + 1
+                if (_toDoList.Count > 0)
                 {
-                    // Update existing todo
-                    existing.Name = toDo.Name;
-                    existing.Description = toDo.Description;
-                    existing.Priority = toDo.Priority;
-                    existing.IsCompleted = toDo.IsCompleted;
-                    existing.DueDate = toDo.DueDate;
-                    existing.ProjectId = toDo.ProjectId;
-                    existing.Project = toDo.Project;
-                    existing.AssignedUserId = toDo.AssignedUserId;
-                    existing.AssignedUser = toDo.AssignedUser;
-                    
-                    // Ensure Project object is set for existing todo too
-                    if (existing.ProjectId.HasValue && existing.ProjectId > 0 && existing.Project == null)
-                    {
-                        existing.Project = ProjectServiceProxy.Current.GetById(existing.ProjectId.Value);
-                    }
-                    
-                    // Ensure User object is set for existing todo too
-                    if (existing.AssignedUserId.HasValue && existing.AssignedUserId > 0 && existing.AssignedUser == null)
-                    {
-                        existing.AssignedUser = UserServiceProxy.Current.GetById(existing.AssignedUserId.Value);
-                    }
+                    item.Id = _toDoList.Max(x => x.Id) + 1;
                 }
                 else
                 {
-                    // Add new todo with specific ID
-                    _toDoList.Add(toDo);
+                    item.Id = 1;
                 }
+                _toDoList.Add(item);
+            }
+            else
+            {
+                // update existing todo
+                var index = _toDoList.IndexOf(existingToDo);
+                _toDoList[index] = item;
             }
 
-            // Always update the project's completion percentage if the todo belongs to a project
-            if (toDo?.ProjectId != null && toDo.ProjectId > 0)
+            // make sure Project object is also updated
+            if (item.Project != null)
             {
-                var project = ProjectServiceProxy.Current.GetById(toDo.ProjectId.Value);
-                if (project != null)
-                {
-                    // Ensure the todo is in the project's todo list
-                    if (!project.ToDos.Contains(toDo))
-                    {
-                        project.ToDos.Add(toDo);
-                    }
-                    // This will recalculate the completion percentage
-                    ProjectServiceProxy.Current.AddOrUpdate(project);
-                }
+                ProjectServiceProxy.Current.AddOrUpdate(item.Project);
             }
-            else if (toDo?.Project != null)
-            {
-                // Fallback for when Project object is available but ProjectId might not be set
-                ProjectServiceProxy.Current.AddOrUpdate(toDo.Project);
-            }
-            return toDo;
         }
 
         public void DisplayToDos(bool isShowCompleted = false)
@@ -176,7 +120,7 @@ namespace Asana.Library.Services
 
         public List<ToDo> GetAllToDos()
         {
-            // This method allows managers to access all todos regardless of assignment
+            // this method allows managers to access all todos regardless of assignment
             return _toDoList.Take(100).ToList();
         }
 

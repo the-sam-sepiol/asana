@@ -53,7 +53,7 @@ namespace Asana.Maui.ViewModels
             {
                 var allUsers = new List<User>();
                 
-                // Add "Unassigned" option for managers
+                // add "Unassigned" option for managers
                 if (IsManagerLoggedIn)
                 {
                     allUsers.Add(new User { Id = 0, Name = "Unassigned" });
@@ -160,7 +160,7 @@ namespace Asana.Maui.ViewModels
 
         public void AddOrUpdateToDo()
         {
-            // Handle project assignment
+            // handle project assignment
             if (Model?.Project != null && Model.ProjectId.HasValue && Model.ProjectId > 0)
             {
                 var project = ProjectServiceProxy.Current.GetById(Model.ProjectId.Value);

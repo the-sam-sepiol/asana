@@ -65,7 +65,7 @@ namespace Asana.Maui.ViewModels
                 return;
             }
 
-            // Check if user already exists
+            // check if user already exists
             var existingUser = UserServiceProxy.Current.GetByName(NewUserName);
             if (existingUser != null)
             {
@@ -90,7 +90,7 @@ namespace Asana.Maui.ViewModels
             if (user == null || user.IsManager)
                 return;
 
-            // Check if user has assigned tasks
+            // check if user has assigned tasks
             var assignedTasks = ToDoServiceProxy.Current.GetAllToDos()
                 .Where(t => t.AssignedUserId == user.Id).ToList();
 

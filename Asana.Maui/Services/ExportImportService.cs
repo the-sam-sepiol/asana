@@ -13,7 +13,7 @@ namespace Asana.Maui.Services
             sb.AppendLine($"Exported on: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine();
 
-            // Export Users
+            // export Users
             sb.AppendLine("=== USERS ===");
             var users = UserServiceProxy.Current.Users;
             foreach (var user in users)
@@ -28,7 +28,7 @@ namespace Asana.Maui.Services
                 sb.AppendLine();
             }
 
-            // Export Projects
+            // export Projects
             sb.AppendLine("=== PROJECTS ===");
             var projects = ProjectServiceProxy.Current.Projects;
             foreach (var project in projects)
@@ -42,7 +42,7 @@ namespace Asana.Maui.Services
                 sb.AppendLine();
             }
 
-            // Export ToDos (get all todos for export, not filtered by user)
+            // export ToDos (get all todos for export, not filtered by user)
             sb.AppendLine("=== TODOS ===");
             var todos = ToDoServiceProxy.Current.GetAllToDos();
             foreach (var todo in todos)
@@ -75,7 +75,7 @@ namespace Asana.Maui.Services
                 var projects = new List<Project>();
                 var todos = new List<ToDo>();
 
-                // Parse Users, Projects, and ToDos
+                // parse Users, Projects, and ToDos
                 for (int i = 0; i < lines.Length; i++)
                 {
                     if (lines[i] == "USER_START")
@@ -104,33 +104,33 @@ namespace Asana.Maui.Services
                     }
                 }
 
-                // Clear existing data and import new data
+                // clear existing data and import new data
                 var userService = UserServiceProxy.Current;
                 var projectService = ProjectServiceProxy.Current;
                 var todoService = ToDoServiceProxy.Current;
                 
-                // Clear data by creating new service instances (this is a simple approach)
-                // In a production app, you'd want proper Clear methods
+                // clear data by creating new service instances (this is a simple approach)
+                // in a production app, you'd want proper Clear methods
                 
-                // Import users first
+                // import users first
                 foreach (var user in users)
                 {
                     userService.AddOrUpdate(user);
                 }
 
-                // Import projects
+                // import projects
                 foreach (var project in projects)
                 {
                     projectService.AddOrUpdate(project);
                 }
 
-                // Then import todos
+                // then import todos
                 foreach (var todo in todos)
                 {
                     todoService.AddOrUpdate(todo);
                 }
 
-                // Debug: Check if data was actually imported
+                // debug: check if data was actually imported
                 System.Diagnostics.Debug.WriteLine($"Imported {users.Count} users, {projects.Count} projects and {todos.Count} todos");
                 System.Diagnostics.Debug.WriteLine($"Total users in service: {userService.Users.Count}");
                 System.Diagnostics.Debug.WriteLine($"Total projects in service: {projectService.Projects.Count}");
