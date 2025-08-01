@@ -36,7 +36,7 @@
                             FontSize="16"
                             Padding="15,10" />
                     
-                    <Button Text="Manager Login" 
+                    <Button Text="{Binding ManagerButtonText}" 
                             Command="{Binding ShowManagerLoginCommand}"
                             BackgroundColor="Blue" 
                             TextColor="White"
@@ -99,9 +99,14 @@
                    IsVisible="{Binding IsManagerSignupVisible}">
                 <VerticalStackLayout Spacing="15">
                     
-                    <Label Text="First Time? Create Manager Account" 
-                           FontSize="16" 
+                    <Label Text="Create Manager Account" 
+                           FontSize="18" 
                            FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+                    
+                    <Label Text="No manager account exists. Create one to get started." 
+                           FontSize="14" 
+                           TextColor="Gray"
                            HorizontalOptions="Center" />
                     
                     <Entry x:Name="NewManagerUsernameEntry"

@@ -25,11 +25,17 @@ namespace Asana.Maui.ViewModels
             CancelManagerLoginCommand = new Command(() => CancelManagerLogin());
             CreateManagerCommand = new Command(async () => await CreateManager());
 
-            // Check if there's already a manager account, if not show signup
+            // Check if there's already a manager account
             var existingManager = UserServiceProxy.Current.Users.FirstOrDefault(u => u.IsManager);
             if (existingManager == null)
             {
+                // No manager exists, show signup form
                 IsManagerSignupVisible = true;
+            }
+            else
+            {
+                // Manager exists, hide signup form
+                IsManagerSignupVisible = false;
             }
         }
 
@@ -118,6 +124,16 @@ namespace Asana.Maui.ViewModels
             {
                 _isManagerSignupVisible = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(ManagerButtonText));
+            }
+        }
+
+        public string ManagerButtonText
+        {
+            get
+            {
+                var existingManager = UserServiceProxy.Current.Users.FirstOrDefault(u => u.IsManager);
+                return existingManager == null ? "Create Manager Account" : "Manager Login";
             }
         }
 
@@ -148,8 +164,20 @@ namespace Asana.Maui.ViewModels
 
         private void ShowManagerLogin()
         {
-            IsManagerLoginVisible = true;
-            IsManagerSignupVisible = false;
+            // Check if manager exists
+            var existingManager = UserServiceProxy.Current.Users.FirstOrDefault(u => u.IsManager);
+            if (existingManager == null)
+            {
+                // No manager exists, show signup instead
+                IsManagerSignupVisible = true;
+                IsManagerLoginVisible = false;
+            }
+            else
+            {
+                // Manager exists, show login
+                IsManagerLoginVisible = true;
+                IsManagerSignupVisible = false;
+            }
             ClearError();
         }
 
@@ -198,6 +226,11 @@ namespace Asana.Maui.ViewModels
 
             UserServiceProxy.Current.AddOrUpdate(newManager);
             UserServiceProxy.Current.CurrentUser = newManager;
+
+            // Clear the form
+            NewManagerUsername = string.Empty;
+            NewManagerPassword = string.Empty;
+            IsManagerSignupVisible = false;
 
             await Shell.Current.GoToAsync("//MainPage");
         }

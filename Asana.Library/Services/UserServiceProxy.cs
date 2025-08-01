@@ -35,19 +35,7 @@ namespace Asana.Library.Services
 
         private UserServiceProxy()
         {
-            // Initialize with a default manager if none exists
-            if (!_userList.Any(u => u.IsManager))
-            {
-                var defaultManager = new User
-                {
-                    Id = 1,
-                    Name = "Manager",
-                    IsManager = true,
-                    ManagerUsername = "admin",
-                    ManagerPassword = "admin"
-                };
-                _userList.Add(defaultManager);
-            }
+            // Don't initialize with a default manager - let the UI handle manager creation
         }
 
         private static UserServiceProxy? instance;

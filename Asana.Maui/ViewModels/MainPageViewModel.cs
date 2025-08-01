@@ -124,6 +124,27 @@ namespace Asana.Maui.ViewModels
             get
             {
                 var currentUser = UserServiceProxy.Current.CurrentUser;
+                if (currentUser == null)
+                    return "Not logged in";
+                
+                return currentUser.IsManager ? $"Welcome, Manager ({currentUser.Name})" : $"Welcome, {currentUser.Name}";
+            }
+        }
+
+        public bool IsManager
+        {
+            get
+            {
+                var currentUser = UserServiceProxy.Current.CurrentUser;
+                return currentUser?.IsManager == true;
+            }
+        }
+
+        public string WelcomeMessage
+        {
+            get
+            {
+                var currentUser = UserServiceProxy.Current.CurrentUser;
                 if (currentUser != null)
                 {
                     return $"Welcome, {currentUser.Name}";
