@@ -236,10 +236,6 @@ namespace Asana.Maui.Services
                         case "DESCRIPTION":
                             project.Description = string.IsNullOrEmpty(value) ? null : value;
                             break;
-                        case "COMPLETION":
-                            if (double.TryParse(value, out double completion))
-                                project.CompletionPercent = (int)Math.Round(completion);
-                            break;
                     }
                 }
                 index++;

@@ -210,19 +210,10 @@ namespace Asana.Maui.ViewModels
             // apply sorting
             filteredToDos = SelectedSortOption switch
             {
-                ToDoSortOption.Name => IsSortDescending 
-                    ? filteredToDos.OrderByDescending(t => t.Model?.Name) 
-                    : filteredToDos.OrderBy(t => t.Model?.Name),
-                ToDoSortOption.Priority => IsSortDescending 
-                    ? filteredToDos.OrderByDescending(t => t.Model?.Priority) 
-                    : filteredToDos.OrderBy(t => t.Model?.Priority),
-                ToDoSortOption.DueDate => IsSortDescending 
-                    ? filteredToDos.OrderByDescending(t => t.Model?.DueDate) 
-                    : filteredToDos.OrderBy(t => t.Model?.DueDate),
-                ToDoSortOption.Project => IsSortDescending 
-                    ? filteredToDos.OrderByDescending(t => t.Model?.Project?.Name) 
-                    : filteredToDos.OrderBy(t => t.Model?.Project?.Name),
-                _ => filteredToDos
+                ToDoSortOption.Name => IsSortDescending ? filteredToDos.OrderByDescending(t => t.Model?.Name) : filteredToDos.OrderBy(t => t.Model?.Name),
+                ToDoSortOption.Priority => IsSortDescending ? filteredToDos.OrderByDescending(t => t.Model?.Priority) : filteredToDos.OrderBy(t => t.Model?.Priority),
+                ToDoSortOption.DueDate => IsSortDescending ? filteredToDos.OrderByDescending(t => t.Model?.DueDate) : filteredToDos.OrderBy(t => t.Model?.DueDate),
+                ToDoSortOption.Project => IsSortDescending ? filteredToDos.OrderByDescending(t => t.Model?.Project?.Name) : filteredToDos.OrderBy(t => t.Model?.Project?.Name), _ => filteredToDos
             };
 
             if (IsGroupedView)
