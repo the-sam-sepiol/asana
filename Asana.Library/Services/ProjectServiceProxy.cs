@@ -92,10 +92,23 @@ namespace Asana.Library.Services
 
         private int CalculateCompletionPercent(Project project)
         {
-            if (project.ToDos == null || project.ToDos.Count == 0)
+            // get all todos for this project from the todo service
+            var allTodos = ToDoServiceProxy.Current.GetAllToDos()
+                .Where(t => t.ProjectId == project.Id).ToList();
+            
+            if (allTodos.Count == 0)
                 return 0;
-            int completed = project.ToDos.Count(t => t.IsCompleted == true);
-            return (int)Math.Round((completed * 100.0) / project.ToDos.Count);
+                
+            int completed = allTodos.Count(t => t.IsCompleted == true);
+            return (int)Math.Round((completed * 100.0) / allTodos.Count);
+        }
+
+        public void RefreshCompletionPercentages()
+        {
+            foreach (var project in _projectList)
+            {
+                project.CompletionPercent = CalculateCompletionPercent(project);
+            }
         }
 
         public void DisplayProjects()

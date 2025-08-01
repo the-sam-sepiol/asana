@@ -152,6 +152,9 @@ namespace Asana.Maui.Services
                     }
                 }
 
+                // refresh project completion percentages after all todos are linked
+                projectService.RefreshCompletionPercentages();
+
                 // debug: check if data was actually imported
                 System.Diagnostics.Debug.WriteLine($"Imported {users.Count} users, {projects.Count} projects and {todos.Count} todos");
                 System.Diagnostics.Debug.WriteLine($"Total users in service: {userService.Users.Count}");

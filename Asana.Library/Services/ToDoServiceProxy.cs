@@ -97,6 +97,9 @@ namespace Asana.Library.Services
             {
                 ProjectServiceProxy.Current.AddOrUpdate(item.Project);
             }
+            
+            // refresh completion percentages for all projects
+            ProjectServiceProxy.Current.RefreshCompletionPercentages();
         }
 
         public void DisplayToDos(bool isShowCompleted = false)
@@ -136,6 +139,9 @@ namespace Asana.Library.Services
                 ProjectServiceProxy.Current.AddOrUpdate(toDo.Project);
             }
             _toDoList.Remove(toDo);
+            
+            // refresh completion percentages for all projects
+            ProjectServiceProxy.Current.RefreshCompletionPercentages();
         }
 
     }
