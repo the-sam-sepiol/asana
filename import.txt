@@ -1,0 +1,904 @@
+=== USERS ===
+USER_START
+ID: 2
+NAME: John Smith
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 3
+NAME: Sarah Johnson
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 4
+NAME: Mike Davis
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 5
+NAME: Emily Brown
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 6
+NAME: Alex Wilson
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 7
+NAME: Lisa Garcia
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 8
+NAME: David Chen
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 9
+NAME: Maria Rodriguez
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+USER_START
+ID: 10
+NAME: James Taylor
+IS_MANAGER: False
+MANAGER_USERNAME: 
+MANAGER_PASSWORD: 
+USER_END
+
+=== PROJECTS ===
+PROJECT_START
+ID: 1
+NAME: Website Redesign
+DESCRIPTION: Complete overhaul of company website with modern design and improved UX
+PROJECT_END
+
+PROJECT_START
+ID: 2
+NAME: Mobile App Development
+DESCRIPTION: Native iOS and Android app for customer engagement
+PROJECT_END
+
+PROJECT_START
+ID: 3
+NAME: Database Migration
+DESCRIPTION: Migrate legacy database to cloud-based solution
+PROJECT_END
+
+PROJECT_START
+ID: 4
+NAME: Marketing Campaign Q3
+DESCRIPTION: Summer marketing campaign for new product launch
+PROJECT_END
+
+PROJECT_START
+ID: 5
+NAME: Security Audit
+DESCRIPTION: Comprehensive security review and penetration testing
+PROJECT_END
+
+PROJECT_START
+ID: 6
+NAME: Employee Training Program
+DESCRIPTION: New employee onboarding and skill development program
+PROJECT_END
+
+PROJECT_START
+ID: 7
+NAME: E-commerce Platform
+DESCRIPTION: Build new online shopping platform with payment integration
+PROJECT_END
+
+PROJECT_START
+ID: 8
+NAME: Data Analytics Dashboard
+DESCRIPTION: Create comprehensive analytics dashboard for business insights
+PROJECT_END
+
+PROJECT_START
+ID: 9
+NAME: Customer Support System
+DESCRIPTION: Implement new ticketing and support management system
+PROJECT_END
+
+PROJECT_START
+ID: 10
+NAME: Quality Assurance Framework
+DESCRIPTION: Establish comprehensive QA processes and automated testing
+PROJECT_END
+
+=== TODOS ===
+TODO_START
+ID: 1
+NAME: Design Homepage Mockup
+DESCRIPTION: Create wireframes and visual mockups for new homepage layout
+PRIORITY: 1
+DUE_DATE: 2025-08-15
+IS_COMPLETED: True
+PROJECT_ID: 1
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 2
+NAME: Implement User Authentication
+DESCRIPTION: Set up secure login system with password encryption
+PRIORITY: 1
+DUE_DATE: 2025-08-20
+IS_COMPLETED: False
+PROJECT_ID: 1
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 3
+NAME: Create API Documentation
+DESCRIPTION: Document all REST API endpoints with examples
+PRIORITY: 2
+DUE_DATE: 2025-08-25
+IS_COMPLETED: False
+PROJECT_ID: 2
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 4
+NAME: Design Mobile UI Components
+DESCRIPTION: Create reusable UI components for mobile app
+PRIORITY: 2
+DUE_DATE: 2025-08-18
+IS_COMPLETED: True
+PROJECT_ID: 2
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 5
+NAME: Set up CI/CD Pipeline
+DESCRIPTION: Configure automated build and deployment pipeline
+PRIORITY: 1
+DUE_DATE: 2025-08-22
+IS_COMPLETED: False
+PROJECT_ID: 2
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 6
+NAME: Data Schema Analysis
+DESCRIPTION: Analyze current database schema and identify migration requirements
+PRIORITY: 1
+DUE_DATE: 2025-08-10
+IS_COMPLETED: True
+PROJECT_ID: 3
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 7
+NAME: Set up Cloud Database
+DESCRIPTION: Configure new cloud database instance with proper security
+PRIORITY: 1
+DUE_DATE: 2025-08-12
+IS_COMPLETED: True
+PROJECT_ID: 3
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 8
+NAME: Migrate User Data
+DESCRIPTION: Transfer all user data to new database with validation
+PRIORITY: 2
+DUE_DATE: 2025-08-14
+IS_COMPLETED: True
+PROJECT_ID: 3
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 9
+NAME: Performance Testing
+DESCRIPTION: Load test new database under various conditions
+PRIORITY: 3
+DUE_DATE: 2025-08-16
+IS_COMPLETED: False
+PROJECT_ID: 3
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 10
+NAME: Create Marketing Materials
+DESCRIPTION: Design brochures, flyers, and digital assets
+PRIORITY: 2
+DUE_DATE: 2025-08-30
+IS_COMPLETED: True
+PROJECT_ID: 4
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 11
+NAME: Social Media Campaign
+DESCRIPTION: Plan and execute social media marketing strategy
+PRIORITY: 2
+DUE_DATE: 2025-09-05
+IS_COMPLETED: True
+PROJECT_ID: 4
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 12
+NAME: Email Marketing Setup
+DESCRIPTION: Configure email automation and newsletter templates
+PRIORITY: 3
+DUE_DATE: 2025-09-10
+IS_COMPLETED: False
+PROJECT_ID: 4
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 13
+NAME: Analyze Website Traffic
+DESCRIPTION: Review analytics and prepare performance report
+PRIORITY: 3
+DUE_DATE: 2025-09-15
+IS_COMPLETED: False
+PROJECT_ID: 4
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 14
+NAME: Network Security Scan
+DESCRIPTION: Perform comprehensive network vulnerability assessment
+PRIORITY: 1
+DUE_DATE: 2025-08-28
+IS_COMPLETED: False
+PROJECT_ID: 5
+ASSIGNED_USER_ID: 6
+TODO_END
+
+TODO_START
+ID: 15
+NAME: Code Security Review
+DESCRIPTION: Manual code review for security vulnerabilities
+PRIORITY: 1
+DUE_DATE: 2025-09-01
+IS_COMPLETED: False
+PROJECT_ID: 5
+ASSIGNED_USER_ID: 6
+TODO_END
+
+TODO_START
+ID: 16
+NAME: Penetration Testing
+DESCRIPTION: External penetration testing by security firm
+PRIORITY: 2
+DUE_DATE: 2025-09-05
+IS_COMPLETED: False
+PROJECT_ID: 5
+ASSIGNED_USER_ID: 6
+TODO_END
+
+TODO_START
+ID: 17
+NAME: Security Policy Update
+DESCRIPTION: Update company security policies and procedures
+PRIORITY: 3
+DUE_DATE: 2025-09-10
+IS_COMPLETED: False
+PROJECT_ID: 5
+ASSIGNED_USER_ID: 6
+TODO_END
+
+TODO_START
+ID: 18
+NAME: Create Training Materials
+DESCRIPTION: Develop comprehensive onboarding documentation
+PRIORITY: 2
+DUE_DATE: 2025-08-05
+IS_COMPLETED: True
+PROJECT_ID: 6
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 19
+NAME: Schedule Training Sessions
+DESCRIPTION: Coordinate training calendar with HR and departments
+PRIORITY: 2
+DUE_DATE: 2025-08-08
+IS_COMPLETED: True
+PROJECT_ID: 6
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 20
+NAME: Conduct Training Workshops
+DESCRIPTION: Deliver hands-on training sessions for new employees
+PRIORITY: 1
+DUE_DATE: 2025-08-12
+IS_COMPLETED: True
+PROJECT_ID: 6
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 21
+NAME: Gather Training Feedback
+DESCRIPTION: Collect feedback and assess training effectiveness
+PRIORITY: 3
+DUE_DATE: 2025-08-15
+IS_COMPLETED: True
+PROJECT_ID: 6
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 22
+NAME: Update Training Program
+DESCRIPTION: Improve training based on feedback and best practices
+PRIORITY: 3
+DUE_DATE: 2025-08-20
+IS_COMPLETED: False
+PROJECT_ID: 6
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 23
+NAME: Setup E-commerce Framework
+DESCRIPTION: Initialize the base framework for e-commerce platform
+PRIORITY: 1
+DUE_DATE: 2025-08-25
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 24
+NAME: Design Product Catalog Interface
+DESCRIPTION: Create user interface for browsing products
+PRIORITY: 2
+DUE_DATE: 2025-08-30
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 25
+NAME: Implement Shopping Cart
+DESCRIPTION: Build shopping cart functionality with session management
+PRIORITY: 1
+DUE_DATE: 2025-09-02
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 7
+TODO_END
+
+TODO_START
+ID: 26
+NAME: Payment Gateway Integration
+DESCRIPTION: Integrate secure payment processing system
+PRIORITY: 1
+DUE_DATE: 2025-09-10
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 8
+TODO_END
+
+TODO_START
+ID: 27
+NAME: Inventory Management System
+DESCRIPTION: Create backend system for managing product inventory
+PRIORITY: 2
+DUE_DATE: 2025-09-15
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 9
+TODO_END
+
+TODO_START
+ID: 28
+NAME: Order Processing Workflow
+DESCRIPTION: Design and implement order fulfillment process
+PRIORITY: 1
+DUE_DATE: 2025-09-20
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 10
+TODO_END
+
+TODO_START
+ID: 29
+NAME: Customer Account Management
+DESCRIPTION: Build user account creation and management features
+PRIORITY: 2
+DUE_DATE: 2025-09-25
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 30
+NAME: Product Search and Filtering
+DESCRIPTION: Implement advanced search and filter capabilities
+PRIORITY: 3
+DUE_DATE: 2025-10-01
+IS_COMPLETED: False
+PROJECT_ID: 7
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 31
+NAME: Setup Analytics Database
+DESCRIPTION: Configure data warehouse for analytics dashboard
+PRIORITY: 1
+DUE_DATE: 2025-08-28
+IS_COMPLETED: False
+PROJECT_ID: 8
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 32
+NAME: Create Data Visualization Components
+DESCRIPTION: Build charts and graphs for dashboard
+PRIORITY: 2
+DUE_DATE: 2025-09-03
+IS_COMPLETED: False
+PROJECT_ID: 8
+ASSIGNED_USER_ID: 7
+TODO_END
+
+TODO_START
+ID: 33
+NAME: Implement Real-time Data Updates
+DESCRIPTION: Setup live data streaming for dashboard metrics
+PRIORITY: 1
+DUE_DATE: 2025-09-08
+IS_COMPLETED: False
+PROJECT_ID: 8
+ASSIGNED_USER_ID: 8
+TODO_END
+
+TODO_START
+ID: 34
+NAME: User Access Control for Analytics
+DESCRIPTION: Implement role-based access to different analytics
+PRIORITY: 2
+DUE_DATE: 2025-09-12
+IS_COMPLETED: False
+PROJECT_ID: 8
+ASSIGNED_USER_ID: 9
+TODO_END
+
+TODO_START
+ID: 35
+NAME: Performance Optimization
+DESCRIPTION: Optimize dashboard loading and query performance
+PRIORITY: 3
+DUE_DATE: 2025-09-18
+IS_COMPLETED: False
+PROJECT_ID: 8
+ASSIGNED_USER_ID: 10
+TODO_END
+
+TODO_START
+ID: 36
+NAME: Export and Reporting Features
+DESCRIPTION: Add functionality to export analytics data and reports
+PRIORITY: 3
+DUE_DATE: 2025-09-22
+IS_COMPLETED: False
+PROJECT_ID: 8
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 37
+NAME: Setup Support Ticket System
+DESCRIPTION: Initialize ticketing system infrastructure
+PRIORITY: 1
+DUE_DATE: 2025-08-20
+IS_COMPLETED: True
+PROJECT_ID: 9
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 38
+NAME: Customer Portal Interface
+DESCRIPTION: Build customer-facing support portal
+PRIORITY: 2
+DUE_DATE: 2025-08-26
+IS_COMPLETED: False
+PROJECT_ID: 9
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 39
+NAME: Agent Dashboard
+DESCRIPTION: Create interface for support agents to manage tickets
+PRIORITY: 1
+DUE_DATE: 2025-09-01
+IS_COMPLETED: False
+PROJECT_ID: 9
+ASSIGNED_USER_ID: 7
+TODO_END
+
+TODO_START
+ID: 40
+NAME: Automated Response System
+DESCRIPTION: Implement chatbot for initial customer inquiries
+PRIORITY: 3
+DUE_DATE: 2025-09-15
+IS_COMPLETED: False
+PROJECT_ID: 9
+ASSIGNED_USER_ID: 8
+TODO_END
+
+TODO_START
+ID: 41
+NAME: Knowledge Base Integration
+DESCRIPTION: Connect support system with knowledge base articles
+PRIORITY: 2
+DUE_DATE: 2025-09-20
+IS_COMPLETED: False
+PROJECT_ID: 9
+ASSIGNED_USER_ID: 9
+TODO_END
+
+TODO_START
+ID: 42
+NAME: SLA Monitoring and Alerts
+DESCRIPTION: Setup service level agreement tracking and notifications
+PRIORITY: 2
+DUE_DATE: 2025-09-25
+IS_COMPLETED: False
+PROJECT_ID: 9
+ASSIGNED_USER_ID: 10
+TODO_END
+
+TODO_START
+ID: 43
+NAME: Setup Test Environment
+DESCRIPTION: Configure testing infrastructure and tools
+PRIORITY: 1
+DUE_DATE: 2025-08-22
+IS_COMPLETED: False
+PROJECT_ID: 10
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 44
+NAME: Write Unit Test Suite
+DESCRIPTION: Create comprehensive unit tests for core functionality
+PRIORITY: 1
+DUE_DATE: 2025-08-29
+IS_COMPLETED: False
+PROJECT_ID: 10
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 45
+NAME: Integration Testing Framework
+DESCRIPTION: Develop framework for testing component interactions
+PRIORITY: 2
+DUE_DATE: 2025-09-05
+IS_COMPLETED: False
+PROJECT_ID: 10
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 46
+NAME: Automated UI Testing
+DESCRIPTION: Implement automated user interface testing
+PRIORITY: 2
+DUE_DATE: 2025-09-12
+IS_COMPLETED: False
+PROJECT_ID: 10
+ASSIGNED_USER_ID: 7
+TODO_END
+
+TODO_START
+ID: 47
+NAME: Performance Testing Suite
+DESCRIPTION: Create load and stress testing capabilities
+PRIORITY: 3
+DUE_DATE: 2025-09-18
+IS_COMPLETED: False
+PROJECT_ID: 10
+ASSIGNED_USER_ID: 8
+TODO_END
+
+TODO_START
+ID: 48
+NAME: Test Reporting Dashboard
+DESCRIPTION: Build dashboard for test results and coverage metrics
+PRIORITY: 3
+DUE_DATE: 2025-09-25
+IS_COMPLETED: False
+PROJECT_ID: 10
+ASSIGNED_USER_ID: 9
+TODO_END
+
+TODO_START
+ID: 49
+NAME: Weekly Team Meeting
+DESCRIPTION: Coordinate weekly status meetings with development team
+PRIORITY: 3
+DUE_DATE: 2025-08-09
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 1
+TODO_END
+
+TODO_START
+ID: 50
+NAME: Budget Review
+DESCRIPTION: Review Q3 budget allocations and spending
+PRIORITY: 2
+DUE_DATE: 2025-08-11
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 1
+TODO_END
+
+TODO_START
+ID: 51
+NAME: Client Check-in Call
+DESCRIPTION: Weekly status call with key client stakeholders
+PRIORITY: 2
+DUE_DATE: 2025-08-13
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 1
+TODO_END
+
+TODO_START
+ID: 52
+NAME: Code Review for PR #147
+DESCRIPTION: Review pull request for new feature implementation
+PRIORITY: 2
+DUE_DATE: 2025-08-07
+IS_COMPLETED: True
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 53
+NAME: Fix Bug in Payment Processing
+DESCRIPTION: Investigate and resolve payment gateway timeout issues
+PRIORITY: 1
+DUE_DATE: 2025-08-08
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 2
+TODO_END
+
+TODO_START
+ID: 54
+NAME: Update Portfolio Website
+DESCRIPTION: Add recent projects to personal portfolio
+PRIORITY: 4
+DUE_DATE: 2025-08-25
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 55
+NAME: Research New Design Trends
+DESCRIPTION: Study latest UI/UX trends for upcoming projects
+PRIORITY: 4
+DUE_DATE: 2025-08-30
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 3
+TODO_END
+
+TODO_START
+ID: 56
+NAME: Server Maintenance Window
+DESCRIPTION: Perform scheduled server updates and maintenance
+PRIORITY: 2
+DUE_DATE: 2025-08-17
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 57
+NAME: Backup Verification
+DESCRIPTION: Verify integrity of recent database backups
+PRIORITY: 2
+DUE_DATE: 2025-08-19
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 4
+TODO_END
+
+TODO_START
+ID: 58
+NAME: Content Marketing Blog Post
+DESCRIPTION: Write technical blog post about recent project
+PRIORITY: 3
+DUE_DATE: 2025-08-21
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 59
+NAME: Social Media Strategy Update
+DESCRIPTION: Revise social media content strategy for Q4
+PRIORITY: 3
+DUE_DATE: 2025-08-23
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 5
+TODO_END
+
+TODO_START
+ID: 60
+NAME: Security Patch Installation
+DESCRIPTION: Install latest security patches on production servers
+PRIORITY: 1
+DUE_DATE: 2025-08-16
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 6
+TODO_END
+
+TODO_START
+ID: 61
+NAME: API Rate Limiting Review
+DESCRIPTION: Review and adjust API rate limiting policies
+PRIORITY: 2
+DUE_DATE: 2025-08-24
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 6
+TODO_END
+
+TODO_START
+ID: 62
+NAME: Database Performance Tuning
+DESCRIPTION: Optimize database queries and indexing strategy
+PRIORITY: 2
+DUE_DATE: 2025-08-26
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 7
+TODO_END
+
+TODO_START
+ID: 63
+NAME: Code Documentation Update
+DESCRIPTION: Update technical documentation for new features
+PRIORITY: 3
+DUE_DATE: 2025-08-28
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 7
+TODO_END
+
+TODO_START
+ID: 64
+NAME: Vendor Contract Review
+DESCRIPTION: Review and negotiate renewal of software licenses
+PRIORITY: 2
+DUE_DATE: 2025-08-31
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 8
+TODO_END
+
+TODO_START
+ID: 65
+NAME: Team Skills Assessment
+DESCRIPTION: Conduct quarterly skills assessment for team development
+PRIORITY: 3
+DUE_DATE: 2025-09-05
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 8
+TODO_END
+
+TODO_START
+ID: 66
+NAME: Customer Feedback Analysis
+DESCRIPTION: Analyze recent customer feedback and identify improvement areas
+PRIORITY: 2
+DUE_DATE: 2025-09-07
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 9
+TODO_END
+
+TODO_START
+ID: 67
+NAME: Disaster Recovery Drill
+DESCRIPTION: Conduct quarterly disaster recovery testing
+PRIORITY: 1
+DUE_DATE: 2025-09-10
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 9
+TODO_END
+
+TODO_START
+ID: 68
+NAME: Technology Stack Evaluation
+DESCRIPTION: Evaluate new technologies for potential adoption
+PRIORITY: 4
+DUE_DATE: 2025-09-15
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 10
+TODO_END
+
+TODO_START
+ID: 69
+NAME: Process Automation Review
+DESCRIPTION: Identify manual processes that can be automated
+PRIORITY: 3
+DUE_DATE: 2025-09-20
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 10
+TODO_END
+
+TODO_START
+ID: 70
+NAME: Monthly Security Report
+DESCRIPTION: Compile monthly security metrics and incident report
+PRIORITY: 2
+DUE_DATE: 2025-09-25
+IS_COMPLETED: False
+PROJECT_ID: -1
+ASSIGNED_USER_ID: 6
+TODO_END
