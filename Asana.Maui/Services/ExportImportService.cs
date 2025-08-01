@@ -133,9 +133,9 @@ namespace Asana.Maui.Services
                 // after importing todos, link them to their projects
                 foreach (var todo in todoService.GetAllToDos())
                 {
-                    if (todo.ProjectId > 0)
+                    if (todo.ProjectId.HasValue && todo.ProjectId.Value > 0)
                     {
-                        var project = projectService.GetById(todo.ProjectId);
+                        var project = projectService.GetById(todo.ProjectId.Value);
                         if (project != null)
                         {
                             todo.Project = project;
