@@ -130,6 +130,19 @@ namespace Asana.Maui.Services
                     todoService.AddOrUpdate(todo);
                 }
 
+                // after importing todos, link them to their projects
+                foreach (var todo in todoService.GetAllToDos())
+                {
+                    if (todo.ProjectId > 0)
+                    {
+                        var project = projectService.GetById(todo.ProjectId);
+                        if (project != null)
+                        {
+                            todo.Project = project;
+                        }
+                    }
+                }
+
                 // debug: check if data was actually imported
                 System.Diagnostics.Debug.WriteLine($"Imported {users.Count} users, {projects.Count} projects and {todos.Count} todos");
                 System.Diagnostics.Debug.WriteLine($"Total users in service: {userService.Users.Count}");
